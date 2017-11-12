@@ -32,7 +32,7 @@ sel_feature_set = zeros(1, num_features);
 accuracy_seq = zeros(1, num_features);
 itteration = 1;
 
-while itteration <= num_features
+while ~isEmpty(remaining_features)
     num_candidate_features = length(remaining_features);
     candidate_feature_index = 1;
     best_candidate_accuracy = -1;
@@ -66,10 +66,6 @@ while itteration <= num_features
 end
 
 if(req_plot)
-    figure;
-    plot(accuracy_seq);
-    title('accuracy vs selection itteration');
-    xlabel('selection itteration');
-    ylabel('accuracy');
+    plot()
 
 end
