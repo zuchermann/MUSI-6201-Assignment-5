@@ -14,10 +14,9 @@ function [est_class] = myKnn(test_data, train_data, train_label, K)
 size_test = size(test_data);
 size_train = size(train_data);
 
+num_features = size_test(1);
 num_test_points = size_test(2);
 num_train_points = size_train(2);
-
-train_counts = myCounter(train_label); % used for tie breaking
 
 est_class = zeros(1, num_test_points);
 
@@ -32,7 +31,7 @@ while test_point_index <= num_test_points
         distances(train_point_index) = myDist(current_train_point, current_test_point);
         train_point_index = train_point_index + 1;
     end
-    [~, sort_indexes] = sort(distances);
+    [sorted_dist, sort_indexes] = sort(distances);
     nearest_classes = zeros(K,1);
     least_index = 1;
     while least_index <= K
@@ -41,8 +40,7 @@ while test_point_index <= num_test_points
         nearest_classes(least_index) = current_class;
         least_index = least_index + 1;
     end
-    current_test_class_label = myPickClass(nearest_classes, train_counts);
-    est_class(1, test_point_index) = current_test_class_label;
+    current_test_class_label = myPickClass()
     test_point_index = test_point_index + 1;
 end
 

@@ -24,15 +24,12 @@ function [avg_accuracy, fold_accuracies, conf_mat] = myCrossValidation(data, lab
 size_data = size(data);
 num_features = size_data(1);
 num_data_points = size_data(2);
+partition_size = floor(num_data_points/num_folds);
 classes = unique(labels');
 num_classes = length(classes);
 
 avg_accuracy = 0;
 fold_accuracies = zeros(1, num_folds);
-conf_mat = zeros(num_classes, num_classes);
+conf_mat = zeros();
 
-fold_index = 1;
-while fold_index <= num_folds
-    fold_index = fold_index + 1;
-end
 end
