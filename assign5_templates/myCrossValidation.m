@@ -21,7 +21,7 @@ function [avg_accuracy, fold_accuracies, conf_mat] = myCrossValidation(data, lab
 
     
 %% Add your code here
-num_classes = max(data);
+num_classes = max(labels);
 
 fold_accuracies = zeros(1, num_folds);
 conf_mat = zeros(num_classes, num_classes);
@@ -35,7 +35,7 @@ while fold_index <= num_folds
         current_training_set, current_training_labels, K);
     current_acc = myAcc(current_prediction, current_testing_labels);
     fold_accuracies(1, fold_index) = current_acc;
-    current_conf_mat = myConfMat(current_prediction, current_testing_labels, classes);
+    current_conf_mat = myConfMat(current_prediction, current_testing_labels, num_classes);
     conf_mat = conf_mat + current_conf_mat;
     fold_index = fold_index + 1;
 end

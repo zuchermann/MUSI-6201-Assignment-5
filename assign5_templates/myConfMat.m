@@ -1,10 +1,10 @@
-function [ current_conf_mat ] = myConfMat(current_prediction, current_testing_labels)
+function [ current_conf_mat ] = myConfMat(current_prediction, current_testing_labels, num_classes)
+% given a set of predictions and known labels, computes the confusion
+% matrix.
 
-all_labels = horzcat(current_prediction, current_testing_labels);
 size_test = size(current_testing_labels);
 num_data_points = size_test(2);
-num_all_classes = max(all_labels);
-current_conf_mat = zeros(num_all_classes, num_all_classes);
+current_conf_mat = zeros(num_classes, num_classes);
 point_index = 1;
 while point_index <= num_data_points
     pred = current_prediction(point_index);

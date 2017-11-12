@@ -21,8 +21,7 @@ function [avg_accuracy, fold_accuracies, conf_mat] = myCrossValidation(data, lab
 
     
 %% Add your code here
-size_data = size(data);
-num_classes = max(data);
+num_classes = max(labels);
 
 fold_accuracies = zeros(1, num_folds);
 conf_mat = zeros(num_classes, num_classes);
