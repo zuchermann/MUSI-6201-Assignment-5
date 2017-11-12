@@ -21,18 +21,23 @@ function [avg_accuracy, fold_accuracies, conf_mat] = myCrossValidation(data, lab
 
     
 %% Add your code here
-size_data = size(data);
-num_features = size_data(1);
-num_data_points = size_data(2);
-classes = unique(labels');
-num_classes = length(classes);
+num_classes = max(data);
 
-avg_accuracy = 0;
 fold_accuracies = zeros(1, num_folds);
 conf_mat = zeros(num_classes, num_classes);
 
 fold_index = 1;
 while fold_index <= num_folds
+    [current_training_set, current_training_labels, current_testing_set,...
+        current_testing_labels] = myPartitionData(data, labels,...
+        num_folds, fold_index);
+    current_prediction = myKnn(current_testing_set,...
+        current_training_set, current_training_labels, K);
+    current_acc = myAcc(current_prediction, current_testing_labels);
+    fold_accuracies(1, fold_index) = current_acc;
+    current_conf_mat = myConfMat(current_prediction, current_testing_labels, classes);
+    conf_mat = conf_mat + current_conf_mat;
     fold_index = fold_index + 1;
 end
+avg_accuracy = mean(fold_accuracies);
 end

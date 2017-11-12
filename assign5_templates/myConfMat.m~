@@ -1,0 +1,15 @@
+function [ current_conf_mat ] = myConfMat(current_prediction, current_testing_labels, unique_classes);
+
+all_labels = horzcat(current_prediction, current_testing_labels);
+size_test = size(current_testing_labels);
+num_data_points = size_test(2);
+num_all_classes = max(all_labels);
+conf_temp = zeros(num_all_classes, num_all_classes);
+point_index = 1;
+while point_index <= num_data_points
+    
+    point_index = point_index + 1;
+end
+
+end
+
